@@ -2,9 +2,13 @@ package com.springdemo.entities.dao.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
 import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,9 +32,51 @@ public class EmployeeDaoImplTest {
 	
 	@Autowired
 	private ComboPooledDataSource dataSource;
+		
 	
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	@Before
+	public void setUp() throws Exception{
+		
+		 String username = "springdemouser";
+		
+		 String password = "damilare";
+		
+		String jdbcDriver = "com.msql.cj.jdbc.Driver";
+		
+		String dbUrls = "jdbc:mysql://localhost:3306/springDemoDB?useSSL=false&serverTimezone=UTC";
+		
+		Connection conn = null;
+		
+		QueryRunner queryRunner = new QueryRunner(dataSource);
+		
+		DbUtils.loadDriver(jdbcDriver);
+		
+		conn = DriverManager.getConnection(dbUrls, username, password);
+		
+		queryRunner.update("drop database springdemodb");
+		
+		queryRunner.update("create database springdemodb");
+		
+		queryRunner.update("use springdemodb");
+		
+		queryRunner.update("create table `employee`(\n" + 
+				"	`id` int(11) not null auto_increment,\n" + 
+				"	`first_name` varchar(45) default null,\n" + 
+				"	`last_name` varchar(45) default null,\n" + 
+				"	`email` varchar(45) default null,\n" + 
+				"	\n" + 
+				"	primary key(`id`)\n" + 
+				"	\n" + 
+				")ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;");
+		
+		queryRunner.update("ALTER TABLE employee AUTO_INCREMENT = 1");
+		
+		DbUtils.close(conn);
+		
+	}
 	
 	@Test
 	public void dbManagerClassesInitializedTest() {
@@ -78,18 +124,7 @@ public class EmployeeDaoImplTest {
 		
 		List<Employee> theEmployees = employeeDaoImpl.getEmployees();
 		
-//		assertEquals("John", theEmployees.get(0).getFirstName());
-//		assertEquals("Ken", theEmployees.get(0).getLastName());
-//		assertEquals("Scoolj@gmail.com", theEmployees.get(0).getEmail());
-//		
-//		
-//		assertEquals("James", theEmployees.get(1).getFirstName());
-//		assertEquals("Blue", theEmployees.get(1).getLastName());
-//		assertEquals("josh@gmail.com", theEmployees.get(1).getEmail());
-//		
-//		assertEquals("Tobi", theEmployees.get(2).getFirstName());
-//		assertEquals("Omotosho", theEmployees.get(2).getLastName());
-//		assertEquals("banaba@gmail.com", theEmployees.get(2).getEmail());
+
 		
 		assertNotNull(theEmployees.get(0));
 		assertNotNull(theEmployees.get(1));
@@ -115,6 +150,23 @@ public class EmployeeDaoImplTest {
 	@Test
 	public void updateEmployee() {
 		//get an employee from the database		
+		//create employee
+		Employee tempEmployee3 = new Employee("John", "Ken", "Scoolj@gmail.com");
+		Employee tempEmployee1 = new Employee("James", "Blue", "josh@gmail.com");
+		Employee tempEmployee2 = new Employee("Tobi", "Omotosho", "Banaba@gmail.com");
+		
+		//save employees to the database
+		employeeDaoImpl.addEmployee(tempEmployee3);
+		employeeDaoImpl.addEmployee(tempEmployee1);
+		employeeDaoImpl.addEmployee(tempEmployee2);
+		
+		List<Employee> theEmployees = employeeDaoImpl.getEmployees();
+		
+
+		
+		assertNotNull(theEmployees.get(0));
+		assertNotNull(theEmployees.get(1));
+		assertNotNull(theEmployees.get(2));
 		List<Employee> employeeList = employeeDaoImpl.getEmployees();
 		
 		Employee tempEmployee = employeeList.get(1);
@@ -126,9 +178,6 @@ public class EmployeeDaoImplTest {
 		
 	}
 	
-	@Before
-	public void setUp() throws Exception{
-		
-	}
+	
 
 }
