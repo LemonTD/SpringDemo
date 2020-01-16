@@ -70,7 +70,7 @@ public class EmployeeDaoImplTest {
 				"	\n" + 
 				"	primary key(`id`)\n" + 
 				"	\n" + 
-				")ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;");
+				")ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;");
 		
 		queryRunner.update("ALTER TABLE employee AUTO_INCREMENT = 1");
 		
@@ -112,23 +112,37 @@ public class EmployeeDaoImplTest {
 	@Test
 	public void getEmployeeListTest() {
 		
-		//create employee
-		Employee tempEmployee = new Employee("John", "Ken", "Scoolj@gmail.com");
-		Employee tempEmployee1 = new Employee("James", "Blue", "josh@gmail.com");
-		Employee tempEmployee2 = new Employee("Tobi", "Omotosho", "Banaba@gmail.com");
+		List<Employee> theEmployees = createEmployeeAndSave();
 		
-		//save employees to the database
-		employeeDaoImpl.addEmployee(tempEmployee);
-		employeeDaoImpl.addEmployee(tempEmployee1);
-		employeeDaoImpl.addEmployee(tempEmployee2);
+//		//create employee
+//		Employee tempEmployee = new Employee("John", "Ken", "Scoolj@gmail.com");
+//		Employee tempEmployee1 = new Employee("James", "Blue", "josh@gmail.com");
+//		Employee tempEmployee2 = new Employee("Tobi", "Omotosho", "Banaba@gmail.com");
+//		
+//		//save employees to the database
+//		employeeDaoImpl.addEmployee(tempEmployee);
+//		employeeDaoImpl.addEmployee(tempEmployee1);
+//		employeeDaoImpl.addEmployee(tempEmployee2);
+//		
+//		List<Employee> theEmployees = employeeDaoImpl.getEmployees();
+//		
+//
+//		
+//		assertNotNull(theEmployees.get(0));
+//		assertNotNull(theEmployees.get(1));
+//		assertNotNull(theEmployees.get(2));
+//		
+//		int employeeId = theEmployees.get(0).getId();
+//		
+//		Employee tempEmployee4 = employeeDaoImpl.getEmployeeById(employeeId);
+//		
+//		displayEmployee(tempEmployee4);
+	}
+	
+	@Test
+	public void getEmployeeByIdTest() {
 		
-		List<Employee> theEmployees = employeeDaoImpl.getEmployees();
-		
-
-		
-		assertNotNull(theEmployees.get(0));
-		assertNotNull(theEmployees.get(1));
-		assertNotNull(theEmployees.get(2));
+		List<Employee> theEmployees = createEmployeeAndSave();
 		
 		int employeeId = theEmployees.get(0).getId();
 		
@@ -138,13 +152,18 @@ public class EmployeeDaoImplTest {
 		String lastName = tempEmployee4.getLastName();
 		String email = tempEmployee4.getEmail();
 		
-		assertNotNull(tempEmployee);
-				
-		System.out.println("Employee found from the database: ==>> "+ tempEmployee4);
+		displayEmployee(tempEmployee4);
 		
 		assertEquals(firstName, tempEmployee4.getFirstName());
 		assertEquals(lastName, tempEmployee4.getLastName());
 		assertEquals(email, tempEmployee4.getEmail());
+		
+	}
+
+	private void displayEmployee(Employee tempEmployee4) {
+		
+		System.out.println(tempEmployee4);
+		
 	}
 	
 	@Test
@@ -167,17 +186,62 @@ public class EmployeeDaoImplTest {
 		assertNotNull(theEmployees.get(0));
 		assertNotNull(theEmployees.get(1));
 		assertNotNull(theEmployees.get(2));
-		List<Employee> employeeList = employeeDaoImpl.getEmployees();
+//		List<Employee> employeeList = employeeDaoImpl.getEmployees();
 		
-		Employee tempEmployee = employeeList.get(1);
+		Employee tempEmployee = theEmployees.get(0);
 		
 		//update the employee
 		String firstName = tempEmployee.getFirstName();
 		String lastName = tempEmployee.getFirstName();
 		String email = tempEmployee.getEmail();
 		
+		System.out.println("Employee firstname ====>>> : " + firstName);
+		System.out.println("Employee lastname ====>>> : " + lastName);
+		System.out.println("Employee email ====>>> : " + email);
+		
+		tempEmployee.setLastName("Johnson");
+		
+		//call daoimpl to update employee
+		employeeDaoImpl.updateEmployee(tempEmployee);
 	}
 	
+	private List<Employee> createEmployeeAndSave(){
+		
+		//create employee
+				Employee tempEmployee3 = new Employee("John", "Ken", "Scoolj@gmail.com");
+				Employee tempEmployee1 = new Employee("James", "Blue", "josh@gmail.com");
+				Employee tempEmployee2 = new Employee("Tobi", "Omotosho", "Banaba@gmail.com");
+				
+				//save employees to the database
+				employeeDaoImpl.addEmployee(tempEmployee3);
+				employeeDaoImpl.addEmployee(tempEmployee1);
+				employeeDaoImpl.addEmployee(tempEmployee2);
+				
+				List<Employee> theEmployees = employeeDaoImpl.getEmployees();
+				
+
+				
+				assertNotNull(theEmployees.get(0));
+				assertNotNull(theEmployees.get(1));
+				assertNotNull(theEmployees.get(2));
+
+				return theEmployees;				
+	}
+	
+	@Test
+	public void deleteEmployeeTest() {
+		List<Employee> theEmployees = createEmployeeAndSave();
+		
+		//get an employee from the list of employees
+		Employee tempEmployee = theEmployees.get(0);
+		
+		//display employee
+		displayEmployee(tempEmployee);
+		
+		assertNotNull(tempEmployee);
+		
+		employeeDaoImpl.deleteEmployee(tempEmployee.getId());
+	}
 	
 
 }

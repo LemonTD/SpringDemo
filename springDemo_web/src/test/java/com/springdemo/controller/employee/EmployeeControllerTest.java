@@ -1,6 +1,7 @@
 package com.springdemo.controller.employee;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.springdemo.employee.service.EmployeeService;
+import com.springdemo.entities.Employee;
 
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring-mvc-crud-demo-servlet.xml")
 @RunWith(SpringRunner.class)
@@ -35,23 +37,13 @@ public class EmployeeControllerTest {
 	}
 
 	@Test
-	public void getFormRequestTest() {
-		try {
-			
+	public void addEmployee() throws Exception{
 		
-		mockMvc.perform(post("/showadd"))
-		.andExpect(status().isOk());
+		Employee theEmployee = new Employee("Michael", "husborn", "lemon@gmail.com");
 		
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		doNothing().when(employeeServiceImpl).addEmployee(isA(Employee.class));
 	}
 	
 	
-	@Test
-	public void test() {
-		assertNotNull(employeeServiceImpl);
-	}
 
 }

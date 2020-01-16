@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.springdemo.employee.service.EmployeeServiceImplTest" time="0.328" errors="0" skipped="0">
+<testsuite tests="6" failures="0" name="com.springdemo.employee.service.EmployeeServiceImplTest" time="0.417" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="12.0.2+10"/>
@@ -26,7 +26,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 10"/>
-    <property name="classworlds.conf" value="C:\SemicolonProjects\SpringDemo\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf159880049125811596.tmp"/>
+    <property name="classworlds.conf" value="C:\SemicolonProjects\SpringDemo\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf17751083885436642090.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk-12.0.2\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jdk-12.0.2/bin/server;C:/Program Files/Java/jdk-12.0.2/bin;C:\Program Files\Apache Software Foundation\Tomcat 9.0_ODserv\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files (x86)\Brackets\command;C:\Program Files\Java\jdk-12.0.2\bin;C:\Program Files\MySQL\MySQL Utilities 1.6\;&quot;C:\windows\System32;C:\Python3&quot;;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Latest Setup\apache-maven-3.6.3\bin;C:\Users\LemonOD\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\LemonOD\AppData\Local\Programs\Python\Python37\;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;;C:\Users\LemonOD\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\LemonOD\Documents\eclipse;;."/>
     <property name="jdk.debug" value="release"/>
@@ -59,6 +59,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="addEmployeeTest" time="0.327"/>
-  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="employeeExistsTest" time="0.001"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="addEmployeeTest" time="0.393"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="getEmployeeByIdTest" time="0.004"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="getEmployeesTest" time="0.004"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="deleteEmployeeTest" time="0.016"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="updateEmployeeTest" time="0"/>
+  <testcase classname="com.springdemo.employee.service.EmployeeServiceImplTest" name="employeeExistsTest" time="0"/>
 </testsuite>

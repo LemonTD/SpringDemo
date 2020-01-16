@@ -64,13 +64,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Transactional
-	public void deleteEmployee(Employee theEmployee) {
+	public void deleteEmployee(int employeeId) {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		currentSession.delete(theEmployee);
+		Query theQuery =  currentSession.createQuery("delete from Employee where id=:employeeId");
+	
+		theQuery.setParameter("employeeId", employeeId);
 		
 	}
-
 
 }
